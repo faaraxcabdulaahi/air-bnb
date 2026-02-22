@@ -3,7 +3,7 @@ export interface IContainerProps {
   className?: string;
 }
 
-export interface Listing {
+export interface IListingProps {
   id: number;
   title: string;
   location: string;
@@ -12,7 +12,7 @@ export interface Listing {
 }
 
 export interface IListingCardProps {
-  listing: Listing;
+  listing: IListingProps;
 }
 
 export interface IAuthModalStoreProps {
@@ -26,4 +26,11 @@ export interface IAuthModalStoreProps {
   closeRegister: () => void;
 
   closeAll: () => void;
+}
+
+export interface IModalProps {
+  isOpen:boolean;
+  onClose:()=>void;
+  title:string;
+  children:React.ReactNode;
 }
