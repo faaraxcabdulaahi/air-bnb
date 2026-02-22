@@ -12,7 +12,18 @@ export interface Listing {
 }
 
 export interface IListingCardProps {
-    listing:Listing;
-    
+  listing: Listing;
 }
 
+export interface IAuthModalStoreProps {
+  isLoginOpen: boolean;
+  isRegisterOpen: boolean;
+
+  openLogin: () => void;
+  openRegister: () => void;
+
+  closeLogin: () => void;
+  closeRegister: () => void;
+
+  closeAll: () => void;
+}
