@@ -1,15 +1,28 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
 import Image from "next/image";
 import { LuMenu, LuSearch } from "react-icons/lu";
 
 const Navbar = () => {
- const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-const toggleMenu = () => {
-  setIsOpen((prev) => !prev);
-};
+  const toggleMenu = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <nav className="fixed top-0 z-50 w-full h-18 lg:h-24 bg-white border-b border-gray-200">
@@ -35,7 +48,7 @@ const toggleMenu = () => {
         </div>
 
         {/* Right Navbar  */}
-        <div className="flex items-center gap-4 relative">
+        <div className="flex items-center gap-4 relative" ref={menuRef}>
           <button className="hidden md:block text-sm font-medium px-4 py-2 rounded-b-full bg-gray-50 cursor-pointer hover:bg-gray-100">
             Airbnb your home
           </button>
@@ -57,30 +70,28 @@ const toggleMenu = () => {
           </div>
 
           {/* dropdown menu */}
-         {
-          isOpen && (
-             <div className="absolute right-0 top-14 w-56 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden px-4 py-2">
-            <ul className="text-gray-800  text-sm ">
-              <li className="px-4 py-3 hover:bg-gray-100 cursor-pointer">
-                Airbnb your home
-              </li>
-              <li className="px-4 py-3 hover:bg-gray-100 cursor-pointer">
-                Help Center
-              </li>
-              <div className="border-t my-1 border-gray-300" />
-              <li className="px-4 py-3 hover:bg-gray-100 cursor-pointer">
-                Sign up
-              </li>
-              <li className="px-4 py-3 hover:bg-gray-100 cursor-pointer">
-                Help Center
-              </li>
-              <li className="px-4 py-3 hover:bg-gray-100 cursor-pointer">
-                Sign in
-              </li>
-            </ul>
-          </div>
-          )
-         }
+          {isOpen && (
+            <div className="absolute right-0 top-14 w-56 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden px-4 py-2">
+              <ul className="text-gray-800  text-sm ">
+                <li className="px-4 py-3 hover:bg-gray-100 cursor-pointer">
+                  Airbnb your home
+                </li>
+                <li className="px-4 py-3 hover:bg-gray-100 cursor-pointer">
+                  Help Center
+                </li>
+                <div className="border-t my-1 border-gray-300" />
+                <li className="px-4 py-3 hover:bg-gray-100 cursor-pointer">
+                  Sign up
+                </li>
+                <li className="px-4 py-3 hover:bg-gray-100 cursor-pointer">
+                  Help Center
+                </li>
+                <li className="px-4 py-3 hover:bg-gray-100 cursor-pointer">
+                  Sign in
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </nav>
