@@ -57,7 +57,9 @@ const toggleMenu = () => {
           </div>
 
           {/* dropdown menu */}
-          <div className="absolute right-0 top-14 w-56 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden px-4 py-2">
+         {
+          isOpen && (
+             <div className="absolute right-0 top-14 w-56 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden px-4 py-2">
             <ul className="text-gray-800  text-sm ">
               <li className="px-4 py-3 hover:bg-gray-100 cursor-pointer">
                 Airbnb your home
@@ -77,6 +79,8 @@ const toggleMenu = () => {
               </li>
             </ul>
           </div>
+          )
+         }
         </div>
       </div>
     </nav>
