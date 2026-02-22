@@ -1,9 +1,16 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Logo from "./Logo";
 import Image from "next/image";
 import { LuMenu, LuSearch } from "react-icons/lu";
 
 const Navbar = () => {
+ const [isOpen, setIsOpen] = useState(false);
+
+const toggleMenu = () => {
+  setIsOpen((prev) => !prev);
+};
+
   return (
     <nav className="fixed top-0 z-50 w-full h-18 lg:h-24 bg-white border-b border-gray-200">
       <div className="flex items-center justify-between h-full mx-auto w-[95%] md:w-[90%]">
@@ -33,7 +40,10 @@ const Navbar = () => {
             Airbnb your home
           </button>
           <div className="flex items-center gap-2 border border-gray-300 rounded-full px-2 py-1 hover:shadow-md transition cursor-pointer">
-            <button className="h-8 w-8 grid place-items-center rounded-full hover:bg-gray-100 transition cursor-pointer">
+            <button
+              onClick={toggleMenu}
+              className="h-8 w-8 grid place-items-center rounded-full hover:bg-gray-100 transition cursor-pointer"
+            >
               <LuMenu size={18} />
             </button>
             <div className="relative size-8 rounded-full overflow-hidden">
@@ -61,6 +71,9 @@ const Navbar = () => {
               </li>
               <li className="px-4 py-3 hover:bg-gray-100 cursor-pointer">
                 Help Center
+              </li>
+              <li className="px-4 py-3 hover:bg-gray-100 cursor-pointer">
+                Sign in
               </li>
             </ul>
           </div>
